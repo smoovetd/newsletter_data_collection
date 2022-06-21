@@ -1,4 +1,8 @@
+from cProfile import label
 from fastapi import FastAPI
+import sys
+sys.path.append('../')
+from dto.news import News, WebNews
 
 app = FastAPI()
 
@@ -15,5 +19,8 @@ async def delete_item_by_id(item_id):
     return f"delete_item_by_id {item_id} is not implemented yet"
 
 @app.post("/item/")
-async def insert_item():
-    return f"insert_item is not implemented yet"
+async def insert_item(crnt_web_news: WebNews):
+    print(crnt_web_news)
+    print(crnt_web_news.date)
+    crnt_news = News(crnt_web_news.date, crnt_web_news.name, crnt_web_news.link, crnt_web_news.labels, crnt_web_news.content) 
+    return crnt_news.get_news_dict()

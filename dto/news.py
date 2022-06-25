@@ -8,16 +8,24 @@ class WebNews(BaseModel):
     labels:list 
     content: str 
 
+
 class News():
     '''News - class that holds properties for each one of the news.'''
-    def __init__(self, date:str, name:str, link:str, labels:list, content:str ) -> None:
-       print(f'In HERE!!!{date};{name};{link};{labels};{content}')
+    def __init__(self, date:str, name:str, link:str, labels:list, content:str, id: int = None ) -> None:
+       #print(f'In HERE!!!{date};{name};{link};{labels};{content}')
+       self.set_id(id)
        self.set_date(date)
        self.set_name(name) 
        self.set_link(link)
        self.labels = list()
        self.set_labels(labels)
        self.set_content(content) 
+
+    def set_id(self, id: int) -> None:
+        self.id = id 
+
+    def get_id(self) -> int:
+        return self.id   
 
     def set_date(self, date: str) -> None:
         self.date = date    
@@ -52,6 +60,7 @@ class News():
     def get_news_info(self) -> str:
         '''Returns string of all properties of News instance'''
         res = ''
+        res += f'\Id - {self.get_id()}\n'
         res += f'\tDate - {self.get_date()}\n'
         res += f'\tName - {self.get_name()}\n'
         res += f'\tLink - {self.get_link()}\n'
@@ -61,6 +70,7 @@ class News():
 
     def get_news_dict(self) -> str:
         res = dict()
+        res['id'] = self.get_id()
         res['date'] = self.get_date()
         res['name'] = (self.get_name())
         res['link'] = (self.get_link())

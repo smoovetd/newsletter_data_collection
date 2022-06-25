@@ -8,6 +8,6 @@ crnt_news = News('2022-05-01','test_name', 'http://test.com', ['test', 'app'], c
 
 db_con = DBConnection('test.db')
 db_con.insert(crnt_news.get_news_dict())
-
+print(db_con.select_all_records())
 
 
